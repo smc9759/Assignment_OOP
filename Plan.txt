@@ -10,6 +10,14 @@ hp, mp, dmg is a 스탯
 
 강타, 헤드샷 is a 스킬
 
+"직업별 기본 스탯 + 장비 + 인벤토리 → 합산 스탯"
+
+Character 트리
+├── Role 
+├── BaseStat ← Role이 부여
+├── 장비 스탯
+└── 합산한 스탯
+
 
 #Comment #1
 

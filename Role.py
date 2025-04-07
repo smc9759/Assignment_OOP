@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
+from Stat import 스탯
 from json_loader import ROLE_STAT_CONFIG
 
 class Role(ABC):
+    def __init__(self, base_stat=ROLE_STAT_CONFIG["초보자"]):
+        self.base_stat = base_stat        
     @abstractmethod
     def 평타(self):
         pass
@@ -11,16 +14,30 @@ class Newbie(Role):
         return super().attack()
 
 class Warrior(Role):
-    def __init__(self, name="전사"):
-        super().__init__(name, stat=ROLE_STAT_CONFIG["전사"])
+    """_summary_
+        1) 직업 인스턴스가 변경될 일이 없음
+        2) 메모리 절약하려고 하나 만들어서 공유함
+    Args:
+        Role (_type_): _description_
+    """
+    def __init__(self):
+        #super 쓸거면 매개변수 이름까지 같아야됨
+        #기존 오류 코드 : stat=ROLE_STAT_CONFIG["전사"])
+        super().__init__(base_stat=ROLE_STAT_CONFIG["전사"])
     def 평타(self):
         return super().attack()
     
 class Mage(Role):
-    def __init__(self, name="마법사"):
-        super().__init__(name, stat=ROLE_STAT_CONFIG["마법사"])
+    def __init__(self):
+        super().__init__(base_stat=ROLE_STAT_CONFIG["마법사"])
     def 평타(self):
         return super().attack()
+
+
+WARRIOR = Warrior() 
+
+MAGE = Mage()
+
     
 """
 포함 관계가 아닌 '구성' 관계를 만드는 방법

@@ -1,18 +1,29 @@
 from Stat import 스탯
+from Role import Role
 #캐릭터 구성하기 1) 스탯
 class Player:
     def __init__(self, character):
         self.character = character
 
 class character(Player):
-    def __init__(self, name="None", stat=None):
+    def __init__(self, name, role):
         self.name = name
-        if stat is not None:
-            self.stat = stat
-        else:
-            self.stat = 스탯()
+        self.role = role #전사...
+        self.base_stat = role.base_stat.copy()
+        self.equip_stat = 스탯() #현재 0 (미구현)
+        
+    def stat(self):
+        #스탯 클래스에 연산자 오버로딩 사용 
+        #스탯 더하기 가능
+        return self.base_stat + self.equip_stat
 
         """_summary_
+        
+            if stat is not None:
+                self.stat = stat
+            else:
+                self.stat = 스탯()
+            
             (C) null = (Python) None 
             비슷한 의미로 쓰인다
 
@@ -29,20 +40,14 @@ class character(Player):
         """
 
     def 평타(self, target):
-        if(self.stat.hp_check(target, self.stat.dmg)):
-            print(f" {target.name}에게 {self.stat.dmg}딜")
-            target.stat.hp -= self.stat.dmg
-    
-    def target_hp_check(self, target, skill_dmg):
-        if target.stat.hp < skill_dmg:
-            target.stat.hp = 0
-            print(f" 전투 중 {target.name} 사망")
-            return False
-        else: #뎀 들어가도 죽지는 않을경우
-            return True        
+        dmg = self.stat().dmg
+        if(target.stat().hp_check(dmg)):
+            print(f" {target.name}에게 {dmg}딜")
+            target.base_stat.hp -= dmg      
+            #일단 베이스 체력을 건드림 - 장비 체력을 까면 안될거같아서 
         
     def show_status(self):
-        print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")
+        print(f"이름 : {self.name}\n HP : {self.stat().hp}\n MP : {self.stat().mp}")
     
     
 
