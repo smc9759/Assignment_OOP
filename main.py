@@ -1,4 +1,4 @@
-from 스터디과제.Character import 캐릭터, 전사, 마법사
+from Character import 캐릭터, 전사, 마법사
 
 warrior = 전사("망치할아범")
 

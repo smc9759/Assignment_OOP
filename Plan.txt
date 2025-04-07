@@ -1,0 +1,11 @@
+Player has a 캐릭터
+
+캐릭터 has a Inventory, 직업, 스탯, 스킬
+
+전사, 마법사, 궁수 is a 직업
+
+장비, 물약 is a Inventory
+
+hp, mp, dmg is a 스탯
+
+강타, 헤드샷 is a 스킬
