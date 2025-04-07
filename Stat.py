@@ -4,6 +4,9 @@ class 스탯:
         self.mp = mp
         self.dmg = dmg
     
+    def __repr__(self):
+        return f"스탯(hp={self.hp}, mp={self.mp}, dmg={self.dmg})"
+    
     #딜이 들어왔을 때
     def hp_check(self, input_dmg):
         if (self.hp < input_dmg):
@@ -13,13 +16,14 @@ class 스탯:
             return False
         else:
             return True
-        
-    #증가 - 힐이나 장비 추가체력이 들어왔을 때    
-
-class 캐릭터(스탯):
-    def __init__(self, name):
-        super().__init__(name = name)    
+    
+    
+   
+ 
 """
+#할일    
+#증가 - 힐이나 장비 추가체력이 들어왔을 때 
+
 hp
 mp
 dmg

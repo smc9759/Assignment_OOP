@@ -1,11 +1,24 @@
 from abc import ABC, abstractmethod
+from json_loader import ROLE_STAT_CONFIG
 
 class Role(ABC):
     @abstractmethod
     def 평타(self):
         pass
-    
+
+class Newbie(Role):
+    def 평타(self):
+        return super().attack()
+
 class Warrior(Role):
+    def __init__(self, name="전사"):
+        super().__init__(name, stat=ROLE_STAT_CONFIG["전사"])
+    def 평타(self):
+        return super().attack()
+    
+class Mage(Role):
+    def __init__(self, name="마법사"):
+        super().__init__(name, stat=ROLE_STAT_CONFIG["마법사"])
     def 평타(self):
         return super().attack()
     

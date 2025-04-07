@@ -29,7 +29,7 @@ class character(Player):
         """
 
     def 평타(self, target):
-        if(self.target_hp_check(target, self.stat.dmg)):
+        if(self.stat.hp_check(target, self.stat.dmg)):
             print(f" {target.name}에게 {self.stat.dmg}딜")
             target.stat.hp -= self.stat.dmg
     
@@ -49,25 +49,28 @@ class character(Player):
 
 class 전사(character):
     def __init__(self,name):
-        super().__init__(name=name, hp = 300, mp =0, dmg = 30)
+        super().__init__(name=name)
+        #, hp = 300, mp =0, dmg = 30
     def smite(self, target):
         #강타라 평딜의 2배
-        skill_dmg = self.dmg * 2
+        skill_dmg = self.stat.dmg * 2
         
-        if(self.target_hp_check(target, skill_dmg)):
+        #타겟의 캐릭터 클래스의 스탯 함수를 불러오는 게 헷갈리고 어려움 (공격한 사람의 스탯 함수를 잘못 불러옴)
+        if(target.stat.hp_check(skill_dmg)):
             print(f" {target.name}에게 {skill_dmg}딜")
-            target.hp -= skill_dmg
+            target.stat.hp -= skill_dmg
 
 class 마법사(character):
     def __init__(self, name):
-        super().__init__(name=name, hp=100, mp=300, dmg=1)
+        super().__init__(name=name)
+        #, hp=100, mp=300, dmg=1
     
     def spark(self, target):
         skill_dmg = 120
         
-        if(self.target_hp_check(target, skill_dmg)):
+        if(target.stat.hp_check(skill_dmg)):
             print(f" {target.name}에게 {skill_dmg}딜")
-            target.hp -= skill_dmg            
+            target.stat.hp -= skill_dmg            
 
 class 스킬:
     def __init__(self, name="스킬명", mp = 0, dmg = 1):
