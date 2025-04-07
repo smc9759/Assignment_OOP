@@ -1,4 +1,8 @@
-class 캐릭터:
+class Player:
+    def __init__(self, character):
+        self.character = character
+
+class character(Player):
     def __init__(self, name="None", hp=100, mp=10, dmg=1):
         self.name = name
         self.hp = hp
@@ -24,7 +28,7 @@ class 캐릭터:
     
 
 
-class 전사(캐릭터):
+class 전사(character):
     def __init__(self,name):
         super().__init__(name=name, hp = 300, mp =0, dmg = 30)
     def smite(self, target):
@@ -35,7 +39,7 @@ class 전사(캐릭터):
             print(f" {target.name}에게 {skill_dmg}딜")
             target.hp -= skill_dmg
 
-class 마법사(캐릭터):
+class 마법사(character):
     def __init__(self, name):
         super().__init__(name=name, hp=100, mp=300, dmg=1)
     
@@ -57,8 +61,8 @@ class 스킬:
 
 """
 attack 메서드 구현
-0. 캐릭터 인스턴스를 두개 만든다
-1. 다른 캐릭터 인스턴스를 메서드 인자로 받는다
+0. character 인스턴스를 두개 만든다
+1. 다른 character 인스턴스를 메서드 인자로 받는다
 2. 그 인스턴스의 hp를 깎는다
 3. 나온다
 
