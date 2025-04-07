@@ -1,0 +1,32 @@
+class 스탯:
+    def __init__(self, hp = 100, mp = 0, dmg=0):
+        self.hp = hp
+        self.mp = mp
+        self.dmg = dmg
+    
+    #딜이 들어왔을 때
+    def hp_check(self, input_dmg):
+        if (self.hp < input_dmg):
+            self.hp = 0
+            print(f"현제 체력이 {self.hp}입니다")
+            #캐릭터 상태 사망
+            return False
+        else:
+            return True
+        
+    #증가 - 힐이나 장비 추가체력이 들어왔을 때    
+
+class 캐릭터(스탯):
+    def __init__(self, name):
+        super().__init__(name = name)    
+"""
+hp
+mp
+dmg
+---
+hp check
+hp 증가
+hp 감소
+
+
+"""
