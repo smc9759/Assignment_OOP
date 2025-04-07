@@ -1,29 +1,48 @@
+from Stat import 스탯
+#캐릭터 구성하기 1) 스탯
 class Player:
     def __init__(self, character):
         self.character = character
 
 class character(Player):
-    def __init__(self, name="None", hp=100, mp=10, dmg=1):
+    def __init__(self, name="None", stat=None):
         self.name = name
-        self.hp = hp
-        self.mp = mp
-        self.dmg= dmg
+        if stat is not None:
+            self.stat = stat
+        else:
+            self.stat = 스탯()
+
+        """_summary_
+            (C) null = (Python) None 
+            비슷한 의미로 쓰인다
+
+            조건문에서 등호보다 is 를 권장한다
+            (PEP8) if x == None:  (X)
+                if x is None  (O)
+
+            ✅ == vs is 차이
+            연산자	의미	예시
+            ==	값(value)이 같은지 비교	a == b
+            is	객체(object) 자체가 같은지 비교 (같은 메모리 주소인지)
+        Returns:
+            _type_: _description_
+        """
 
     def 평타(self, target):
-        if(self.target_hp_check(target, self.dmg)):
-            print(f" {target.name}에게 {self.dmg}딜")
-            target.hp -= self.dmg
+        if(self.target_hp_check(target, self.stat.dmg)):
+            print(f" {target.name}에게 {self.stat.dmg}딜")
+            target.stat.hp -= self.stat.dmg
     
     def target_hp_check(self, target, skill_dmg):
-        if target.hp < skill_dmg:
-            target.hp = 0
+        if target.stat.hp < skill_dmg:
+            target.stat.hp = 0
             print(f" 전투 중 {target.name} 사망")
             return False
         else: #뎀 들어가도 죽지는 않을경우
             return True        
         
     def show_status(self):
-        print(f"이름 : {self.name}\n HP : {self.hp}\n MP : {self.mp}")
+        print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")
     
     
 
@@ -77,3 +96,4 @@ attack 메서드 구현
 스킬 클래스 구현
 1. switch 문으로 스킬명에 따라 기능을 나눈다
 """
+
