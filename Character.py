@@ -11,7 +11,8 @@ class character(Player):
         self.role = role #전사...
         self.base_stat = role.base_stat.copy()
         self.equip_stat = 스탯() #현재 0 (미구현)
-        
+    
+    @property    
     def stat(self):
         #스탯 클래스에 연산자 오버로딩 사용 
         #스탯 더하기 가능
@@ -40,14 +41,16 @@ class character(Player):
         """
 
     def 평타(self, target):
-        dmg = self.stat().dmg
-        if(target.stat().hp_check(dmg)):
+        #stat()이 아니라 stat (X) 
+        #property선언 후 stat (O)
+        dmg = self.stat.dmg
+        if(target.stat.hp_check(dmg)):
             print(f" {target.name}에게 {dmg}딜")
             target.base_stat.hp -= dmg      
             #일단 베이스 체력을 건드림 - 장비 체력을 까면 안될거같아서 
         
     def show_status(self):
-        print(f"이름 : {self.name}\n HP : {self.stat().hp}\n MP : {self.stat().mp}")
+        print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")
     
     
 
