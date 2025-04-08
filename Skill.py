@@ -39,3 +39,8 @@ class Smite(Skill):
             print(f"{target.name}에게 {skill_dmg} 물리 피해!")
             target.base_stat.hp -= skill_dmg
     
+    """
+    할일 : 전사 클래스의 스킬을 추가한다
+    set_skill메서드로 스킬을 골라서 사용할 수 있다
+    평타, Q, W, E, R 순으로
+    """

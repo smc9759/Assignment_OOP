@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 from Stat import 스탯
 from json_loader import ROLE_STAT_CONFIG
+from Skill import Spark, Smite
 
 class Role(ABC):
-    def __init__(self, base_stat=ROLE_STAT_CONFIG["초보자"]):
+    def __init__(self, base_stat=ROLE_STAT_CONFIG["초보자"], skill = None):
         self.base_stat = base_stat        
     @abstractmethod
     def 평타(self):
@@ -18,15 +19,15 @@ class Newbie(Role):
 
 class Warrior(Role):
     """_summary_
-        1) 직업 인스턴스가 변경될 일이 없음
-        2) 메모리 절약하려고 하나 만들어서 공유함
+
     Args:
         Role (_type_): _description_
     """
-    def __init__(self):
+    def __init__(self,Smite):
         #super 쓸거면 매개변수 이름까지 같아야됨
         #기존 오류 코드 : stat=ROLE_STAT_CONFIG["전사"])
         super().__init__(base_stat=ROLE_STAT_CONFIG["전사"])
+        self.skill = Smite
     def 평타(self, character_instance, target):
         user = character_instance
         dmg = user.stat.dmg
@@ -36,15 +37,16 @@ class Warrior(Role):
     
     def use_skill(self, character_instance, target):
         # 전사의 '강타' : 평타 2배
-        user = character_instance
-        skill_dmg = user.stat.dmg * 2
-        if target.stat.hp_check(skill_dmg):
-            print(f"{target.name}에게 {skill_dmg} 물리 피해!")
-            target.base_stat.hp -= skill_dmg
+        # self.skill로 Skill과 Smite 클래스를 이미 가지고 왔다
+        # Smite 메서드를 직접 호출하지 않고 추상 메서드 use를 호출한다
+# 오류  self.skill.Smite.use()
+        self.skill.use(character_instance, target)
+
     
 class Mage(Role):
-    def __init__(self):
+    def __init__(self, Spark):
         super().__init__(base_stat=ROLE_STAT_CONFIG["마법사"])
+        self.skill = Spark
     def 평타(self, user, target):
         dmg = user.stat.dmg
         if target.stat.hp_check(dmg):
@@ -52,15 +54,11 @@ class Mage(Role):
             target.base_stat.hp -= dmg
     def use_skill(self, character_instance, target):
         # spark : 60 + dmg
-        user = character_instance
-        skill_dmg = 60 + (user.stat.dmg * 2)     
-        if(target.stat.hp_check(skill_dmg)):
-            print(f"{target.name}에게 {skill_dmg} 마법 피해")
-            target.base_stat.hp -= skill_dmg  
+        self.skill.use(character_instance, target)
 
-WARRIOR = Warrior() 
-
-MAGE = Mage()
+#변경할 일 없는 클래스는 인스턴스를 하나만 만들어서 공유함 (효과 : 메모리 절약)
+WARRIOR = Warrior(Smite()) 
+MAGE = Mage(Spark())
 
     
 """
