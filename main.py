@@ -11,6 +11,8 @@ mage = character("숟가락장인", MAGE)
 
 mage.평타(warrior)
 warrior.평타(mage)
+mage.use_skill(warrior)
+warrior.use_skill(mage)
 
 warrior.show_status()
 mage.show_status()

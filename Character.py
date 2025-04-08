@@ -15,8 +15,7 @@ class character(Player):
     
     @property    
     def stat(self):
-        #스탯 클래스에 연산자 오버로딩 사용 
-        #스탯 더하기 가능
+        #스탯 클래스끼리 더하기 가능 (연산자 오버로딩)
         return self.base_stat + self.equip_stat
 
         """_summary_
@@ -48,43 +47,8 @@ class character(Player):
         self.role.use_skill(self, target)  
         
     def show_status(self):
-        print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")
-    
-
-class 전사(character):
-    def __init__(self,name):
-        super().__init__(name=name)
-        #, hp = 300, mp =0, dmg = 30
-    def smite(self, target):
-        #강타라 평딜의 2배
-        skill_dmg = self.stat.dmg * 2
-        
-        #내 캐릭터의 실시간 공격력을 스킬에 반영하는게 어려움움
-        #타겟의 캐릭터 클래스의 스탯 함수를 불러오는 게 헷갈리고 어려움 (공격한 사람의 스탯 함수를 잘못 불러옴)
-        if(target.stat.hp_check(skill_dmg)):
-            print(f" {target.name}에게 {skill_dmg}딜")
-            target.stat.hp -= skill_dmg
-
-class 마법사(character):
-    def __init__(self, name):
-        super().__init__(name=name)
-        #, hp=100, mp=300, dmg=1
-    
-    def spark(self, target):
-        skill_dmg = 120
-        
-        if(target.stat.hp_check(skill_dmg)):
-            print(f" {target.name}에게 {skill_dmg}딜")
-            target.stat.hp -= skill_dmg            
-
-class 스킬:
-    def __init__(self, name="스킬명", mp = 0, dmg = 1):
-        self.name = name
-        self.mp = mp
-        self.dmg = dmg
-        
-        
-        
+        print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")          
+      
 
 """
 #할일 - 평타 맞으면 hp까는 함수에서 base_stat 을 까지않고, 최대 체력에서 까는 방식으로 전환 
