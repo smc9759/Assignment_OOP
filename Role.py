@@ -28,6 +28,7 @@ class Warrior(Role):
         #기존 오류 코드 : stat=ROLE_STAT_CONFIG["전사"])
         super().__init__(base_stat=ROLE_STAT_CONFIG["전사"])
         self.skill = Smite
+    
     def 평타(self, character_instance, target):
         user = character_instance
         dmg = user.stat.dmg
@@ -47,11 +48,13 @@ class Mage(Role):
     def __init__(self, Spark):
         super().__init__(base_stat=ROLE_STAT_CONFIG["마법사"])
         self.skill = Spark
+    
     def 평타(self, user, target):
         dmg = user.stat.dmg
         if target.stat.hp_check(dmg):
             print(f"{target.name}에게 {dmg} 평타 피해!")
             target.base_stat.hp -= dmg
+    
     def use_skill(self, character_instance, target):
         # spark : 60 + dmg
         self.skill.use(character_instance, target)

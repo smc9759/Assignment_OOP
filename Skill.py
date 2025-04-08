@@ -23,7 +23,7 @@ class Spark(Skill):
     def __init__(self):
         super().__init__()
         
-    def use(self, caster : 'Character', target : 'Character'):
+    def use(self, caster, target):
         skill_dmg = 60 + (caster.stat.dmg * 2)     
         if(target.stat.hp_check(skill_dmg)):
             print(f"{target.name}에게 {skill_dmg} 마법 피해")
@@ -33,14 +33,14 @@ class Smite(Skill):
     def __init__(self):
         super().__init__()
         
-    def use(self, caster : 'Character', target : 'Character'):
+    def use(self, caster, target):
         skill_dmg = caster.stat.dmg * 2
         if target.stat.hp_check(skill_dmg):
             print(f"{target.name}에게 {skill_dmg} 물리 피해!")
             target.base_stat.hp -= skill_dmg
     
     """
-    할일 : 전사 클래스의 스킬을 추가한다
+    중요도 하 : 전사 클래스의 스킬을 추가한다
     set_skill메서드로 스킬을 골라서 사용할 수 있다
     평타, Q, W, E, R 순으로
     """
