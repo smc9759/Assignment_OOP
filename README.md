@@ -1,5 +1,9 @@
-#Study Assignment
+# 📘 Study Assignment
 
-##Learning OOP
+## 🎯 Learning OOP
 
-###Game Character Class
+### 🕹️ Game Character Class
+
+- 객체 지향 프로그래밍(OOP)을 이해하기 위한 실습 과제
+- 게임 캐릭터의 **직업**, **장비**, **인벤토리**에 따라 **스탯이 동적으로 변하는 구조**를 설계
+- 스탯 변화가 평타 및 전투 시스템에 영향을 주는 구조로 확장 예정
