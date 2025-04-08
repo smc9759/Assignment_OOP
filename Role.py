@@ -8,7 +8,9 @@ class Role(ABC):
     @abstractmethod
     def 평타(self):
         pass
-
+    def use_skill():
+        pass
+    
 class Newbie(Role):
     def 평타(self):
         return super().attack()
@@ -24,14 +26,35 @@ class Warrior(Role):
         #super 쓸거면 매개변수 이름까지 같아야됨
         #기존 오류 코드 : stat=ROLE_STAT_CONFIG["전사"])
         super().__init__(base_stat=ROLE_STAT_CONFIG["전사"])
-    def 평타(self):
-        return super().attack()
+    def 평타(self, user, target):
+        dmg = user.stat.dmg
+        if target.stat.hp_check(dmg):
+            print(f"{target.name}에게 {dmg} 평타 피해!")
+            target.base_stat.hp -= dmg
+    
+    def use_skill(self, user, target):
+        # 전사의 '강타' : 평타 2배
+        skill_dmg = user.stat.dmg * 2
+        if target.stat.hp_check(skill_dmg):
+            print(f"{target.name}에게 {skill_dmg} 강타 피해!")
+            target.base_stat.hp -= skill_dmg
     
 class Mage(Role):
     def __init__(self):
         super().__init__(base_stat=ROLE_STAT_CONFIG["마법사"])
-    def 평타(self):
-        return super().attack()
+    def 평타(self, user, target):
+        dmg = user.stat.dmg
+        if target.stat.hp_check(dmg):
+            print(f"{target.name}에게 {dmg} 평타 피해!")
+            target.base_stat.hp -= dmg
+    def use_skill():
+        pass
+
+
+class skill():
+    def __init__(self):
+        pass
+
 
 
 WARRIOR = Warrior() 

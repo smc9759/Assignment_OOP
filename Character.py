@@ -1,11 +1,12 @@
 from Stat import 스탯
-from Role import Role
+from Role import Role, Warrior
 #캐릭터 구성하기 1) 스탯
 class Player:
     def __init__(self, character):
         self.character = character
 
 class character(Player):
+    #어려운 개념 - 포함 관계가 아닌 구성 관계
     def __init__(self, name, role):
         self.name = name
         self.role = role #전사...
@@ -41,19 +42,14 @@ class character(Player):
         """
 
     def 평타(self, target):
-        #stat()이 아니라 stat (X) 
-        #property선언 후 stat (O)
-        dmg = self.stat.dmg
-        if(target.stat.hp_check(dmg)):
-            print(f" {target.name}에게 {dmg}딜")
-            target.base_stat.hp -= dmg      
-            #일단 베이스 체력을 건드림 - 장비 체력을 까면 안될거같아서 
+        self.role.평타(self, target)
+
+    def use_skill(self, target):
+        self.role.use_skill(self, target)  
         
     def show_status(self):
         print(f"이름 : {self.name}\n HP : {self.stat.hp}\n MP : {self.stat.mp}")
     
-    
-
 
 class 전사(character):
     def __init__(self,name):
@@ -63,6 +59,7 @@ class 전사(character):
         #강타라 평딜의 2배
         skill_dmg = self.stat.dmg * 2
         
+        #내 캐릭터의 실시간 공격력을 스킬에 반영하는게 어려움움
         #타겟의 캐릭터 클래스의 스탯 함수를 불러오는 게 헷갈리고 어려움 (공격한 사람의 스탯 함수를 잘못 불러옴)
         if(target.stat.hp_check(skill_dmg)):
             print(f" {target.name}에게 {skill_dmg}딜")
@@ -90,6 +87,10 @@ class 스킬:
         
 
 """
+#할일 - 평타 맞으면 hp까는 함수에서 base_stat 을 까지않고, 최대 체력에서 까는 방식으로 전환 
+# (장비의 유효성에 관한 수정사항)
+
+
 attack 메서드 구현
 0. character 인스턴스를 두개 만든다
 1. 다른 character 인스턴스를 메서드 인자로 받는다

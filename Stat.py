@@ -16,7 +16,9 @@ class 스탯:
     def copy(self):
         return 스탯(self.hp, self.mp, self.dmg)
         """_summary_
-        원본 수정 방지
+        실수 방지
+        예 : 전사 기본 스탯을 수정함 -> 
+             모두 같아야 되는 기본 스탯이 달라짐
         """
     
     def __repr__(self):
