@@ -33,7 +33,14 @@ class 스탯:
             return False
         else:
             return True
+        
+    def damage(self, value):
+        self.hp = max(0, self.hp - value)
+        return self.hp > 0
     
+    def heal(self, value):
+        self.hp += value
+
     
    
  

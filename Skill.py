@@ -34,11 +34,24 @@ class Smite(Skill):
         super().__init__()
         
     def use(self, caster, target):
+        skill_dmg = caster.stat.dmg * 3
+        target.stat.damage(skill_dmg)
+
+class Defense(Skill):
+    def __init__(self):
+        super().__init__()
+
+
+class Whirlwind(Skill):
+    def __init__(self):
+        super().__init__()
+    def use(self, caster, target):
         skill_dmg = caster.stat.dmg * 2
         if target.stat.hp_check(skill_dmg):
             print(f"{target.name}에게 {skill_dmg} 물리 피해!")
             target.base_stat.hp -= skill_dmg
-    
+            
+        
     """
     중요도 하 : 전사 클래스의 스킬을 추가한다
     set_skill메서드로 스킬을 골라서 사용할 수 있다

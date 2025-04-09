@@ -38,8 +38,7 @@ class Warrior(Role):
     
     def use_skill(self, character_instance, target):
         # 전사의 '강타' : 평타 2배
-        # self.skill로 Skill과 Smite 클래스를 이미 가지고 왔다
-        # Smite 메서드를 직접 호출하지 않고 추상 메서드 use를 호출한다
+        # 추상 메서드 호출 시 주의
 # 오류  self.skill.Smite.use()
         self.skill.use(character_instance, target)
 
